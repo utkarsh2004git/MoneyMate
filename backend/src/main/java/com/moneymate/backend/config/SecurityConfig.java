@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.config.Customizer;
@@ -14,17 +17,21 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import com.moneymate.backend.security.AppUserDetailsService;
+
 import lombok.RequiredArgsConstructor;
 
 @Configuration
 @RequiredArgsConstructor
 public class SecurityConfig {
 
+    private final AppUserDetailsService appUserDetailsService;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.cors(Customizer.withDefaults())
             .csrf(csrf->csrf.disable())
-            .authorizeHttpRequests(auth->auth.requestMatchers("/health","/status","/login").permitAll()
+            .authorizeHttpRequests(auth->auth.requestMatchers("/health","/status","/login","/register","/activate").permitAll()
             .anyRequest().authenticated())
             .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return httpSecurity.build();
@@ -47,4 +54,13 @@ public class SecurityConfig {
         return source;
     }
 
+    @Bean
+    public AuthenticationManager authenticationManager() {
+        DaoAuthenticationProvider authProvider =
+                new DaoAuthenticationProvider(appUserDetailsService);
+
+        authProvider.setPasswordEncoder(passwordEncoder());
+
+        return new ProviderManager(authProvider);
+    }
 }
