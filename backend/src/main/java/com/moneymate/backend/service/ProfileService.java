@@ -15,11 +15,19 @@ import lombok.RequiredArgsConstructor;
 public class ProfileService {
 
     private final ProfileRepository profileRepository;
-
+    private final EmailService emailService;
 
     public ProfileDTO registerProfile(ProfileDTO profileDTO){
         ProfileEntity newProfile = toEntity(profileDTO);
         newProfile.setActivationToken(UUID.randomUUID().toString());
+        
+        // send activation email
+        String activationLink = "http://localhost:8080/api/v1/activate?token=" + newProfile.getActivationToken();
+        String subject = "Activate your MoneyMate account";
+        String body = "Hi " + newProfile.getFullName() + ",\n\nPlease click the link below to activate your account:\n" + activationLink;
+        
+        emailService.sendEmail(newProfile.getEmail(), subject, body);
+
         ProfileEntity savedProfile = profileRepository.save(newProfile);
         return toDTO(savedProfile);
     }
@@ -48,5 +56,15 @@ public class ProfileService {
                 .build();
     }
 
+    public boolean activateProfile(String token){
+        return profileRepository.findByActivationToken(token)
+                .map(profile -> {
+                    profile.setIsActive(true);
+                    // profile.setActivationToken(null); // Clear the token after activation
+                    profileRepository.save(profile);
+                    return true;
+                })
+                .orElse(false);
+    }
 
 }
