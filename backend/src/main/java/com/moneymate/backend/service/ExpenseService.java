@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.moneymate.backend.dto.ExpenseDTO;
@@ -80,6 +81,21 @@ public class ExpenseService {
         BigDecimal total = expenseRepository.findTotalIncomeByProfileId(profile.getId());
         return total!=null?total:BigDecimal.ZERO;
     }
+
+    // Filter expenses
+
+    public List<ExpenseDTO> filterExpenses(LocalDate startDate,LocalDate endDate,String keyword,Sort sort){
+        ProfileEntity profile = profileService.getCurrentProfile();
+        List<ExpenseEntity> list = expenseRepository.findByProfileIdAndDateBetweenAndNameContainingIgnoreCase(profile.getId(), startDate, endDate, keyword, sort);
+
+        return list.stream().map(this::toDTO).toList();
+    }
+
+
+
+
+
+
 
     // helper methods
 
