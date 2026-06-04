@@ -7,10 +7,8 @@ import java.util.List;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.moneymate.backend.dto.ExpenseDTO;
 import com.moneymate.backend.dto.IncomeDTO;
 import com.moneymate.backend.entity.CategoryEntity;
-import com.moneymate.backend.entity.ExpenseEntity;
 import com.moneymate.backend.entity.IncomeEntity;
 import com.moneymate.backend.entity.ProfileEntity;
 import com.moneymate.backend.repository.CategoryRepository;

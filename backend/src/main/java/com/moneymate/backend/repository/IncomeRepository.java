@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.moneymate.backend.entity.ExpenseEntity;
 import com.moneymate.backend.entity.IncomeEntity;
 
 public interface IncomeRepository extends JpaRepository<IncomeEntity, Long>{
@@ -33,5 +34,8 @@ public interface IncomeRepository extends JpaRepository<IncomeEntity, Long>{
         LocalDate startDate,
         LocalDate endDate
     );
+
+        List<IncomeEntity> findByProfileIdAndDate(Long profileId,LocalDate date);
+
 
 }
