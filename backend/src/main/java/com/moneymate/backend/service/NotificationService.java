@@ -58,10 +58,11 @@ public class NotificationService {
                             Best regards, </span><br>
                             <strong>MoneyMate Team</strong>
                         """.formatted(profile.getFullName(), frontendUrl);
-            
-            emailService.sendEmail(profile.getEmail(),"Daily reminder",body);
-            log.info("Job finished: sendDailyIncomeExpenseReminder()");    
+            if(Boolean.TRUE.equals(profile.getIsActive())){
+                emailService.sendEmail(profile.getEmail(),"Daily reminder",body);
+            }
         }
+        log.info("Job finished: sendDailyIncomeExpenseReminder()");    
     }
 
 
@@ -84,7 +85,6 @@ public class NotificationService {
                     table.append("<td style='border:1px solid #ddd;padding:8px;'>").append(e.getName()).append("</td>");
                     table.append("<td style='border:1px solid #ddd;padding:8px;'>").append(e.getAmount()).append("</td>");
                     table.append("<td style='border:1px solid #ddd;padding:8px;'>").append(e.getCategoryId()!=null?e.getCategoryName():"N/A").append("</td>");
-
                     table.append("</tr>");
 
                 }
