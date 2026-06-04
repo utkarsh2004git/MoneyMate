@@ -62,7 +62,7 @@ public class ProfileService {
             <strong>MoneyMate Team</strong>
         """.formatted(newProfile.getFullName(), activationLink);
         
-        emailService.sendEmail(newProfile.getEmail(), subject, body);
+        // emailService.sendEmail(newProfile.getEmail(), subject, body);
 
         // encoding password 
         newProfile.setPassword(passwordEncoder.encode(newProfile.getPassword()));
