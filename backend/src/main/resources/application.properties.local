@@ -1,0 +1,31 @@
+# spring.application.name=
+
+# spring.datasource.url=
+# spring.datasource.driver-class-name=
+# spring.datasource.username=
+# spring.datasource.password=
+
+server.servlet.context-path=
+
+spring.jpa.hibernate.ddl-auto=
+spring.jpa.show-sql=
+# spring.jpa.properties.hibernate.dialect=
+
+
+# Email Configuration
+spring.mail.host=
+spring.mail.port=
+spring.mail.username=
+spring.mail.password=
+spring.mail.properties.mail.smtp.auth=
+spring.mail.properties.mail.smtp.starttls.enable=
+spring.mail.protocol=
+spring.mail.properties.mail.smtp.from=
+
+money.mate.frontendUrl=
+
+app.activation.url=
+
+jwt.secret=
+
+spring.profiles.active=prod

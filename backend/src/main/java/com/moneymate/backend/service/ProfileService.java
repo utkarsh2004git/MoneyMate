@@ -3,6 +3,7 @@ package com.moneymate.backend.service;
 import java.util.Map;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -29,14 +30,37 @@ public class ProfileService {
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
 
+    @Value("${app.activation.url}")
+    private String activationUrl;
+
     public ProfileDTO registerProfile(ProfileDTO profileDTO){
         ProfileEntity newProfile = toEntity(profileDTO);
         newProfile.setActivationToken(UUID.randomUUID().toString());
+
         
         // send activation email
-        String activationLink = "http://localhost:8080/api/v1/activate?token=" + newProfile.getActivationToken();
+        String activationLink = activationUrl+"/api/v1/activate?token=" + newProfile.getActivationToken();
         String subject = "Activate your MoneyMate account";
-        String body = "Hi " + newProfile.getFullName() + ",\n\nPlease click the link below to activate your account:\n" + activationLink;
+        String body = """
+            <h2>Welcome to MoneyMate!</h2>
+
+            Hi %s,<br>
+            Thank you for registering with MoneyMate.
+            Please click the button below to activate your account.<br>
+            <a href="%s"
+            style="
+                background-color:#2563eb;
+                color:white;
+                text-decoration:none;
+                padding:10px 20px;
+                border-radius:5px;
+                display:inline-block;">
+                Activate Account
+            </a>
+            <br>
+            Best regards,<br>
+            <strong>MoneyMate Team</strong>
+        """.formatted(newProfile.getFullName(), activationLink);
         
         emailService.sendEmail(newProfile.getEmail(), subject, body);
 
