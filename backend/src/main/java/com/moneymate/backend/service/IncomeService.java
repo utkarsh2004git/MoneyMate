@@ -1,5 +1,6 @@
 package com.moneymate.backend.service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -7,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.moneymate.backend.dto.IncomeDTO;
 import com.moneymate.backend.entity.CategoryEntity;
-import com.moneymate.backend.entity.ExpenseEntity;
 import com.moneymate.backend.entity.IncomeEntity;
 import com.moneymate.backend.entity.ProfileEntity;
 import com.moneymate.backend.repository.CategoryRepository;
@@ -63,6 +63,24 @@ public class IncomeService {
 
         incomeRepository.delete(entity);
 
+    }
+
+
+    
+    // get latest 5 incomes of current profile
+
+    public List<IncomeDTO> getLastest5IncomeOfCurrentProfile(){
+        ProfileEntity profile = profileService.getCurrentProfile();
+        List<IncomeEntity> incomes = incomeRepository.findTop5ByProfileIdOrderByDateDesc(profile.getId());
+        return incomes.stream().map(this::toDTO).toList();
+    }
+
+    // get total incomes of current profile
+
+    public BigDecimal getTotalIncomeOfCurrentProfile(){
+        ProfileEntity profile = profileService.getCurrentProfile();
+        BigDecimal total = incomeRepository.findTotalIncomeByProfileId(profile.getId());
+         return total!=null?total:BigDecimal.ZERO;
     }
 
     // helper methods

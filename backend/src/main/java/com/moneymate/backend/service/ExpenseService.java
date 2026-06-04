@@ -1,5 +1,6 @@
 package com.moneymate.backend.service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -65,6 +66,20 @@ public class ExpenseService {
     }
 
 
+    // get latest 5 expenses of current profile
+
+    public List<ExpenseDTO> getLastest5ExpensesOfCurrentProfile(){
+        ProfileEntity profile = profileService.getCurrentProfile();
+        List<ExpenseEntity> expenses = expenseRepository.findTop5ByProfileIdOrderByDateDesc(profile.getId());
+        return expenses.stream().map(this::toDTO).toList();
+    }
+
+    // get total expenses of current profile
+    public BigDecimal getTotalExpenseOfCurrentProfile(){
+        ProfileEntity profile = profileService.getCurrentProfile();
+        BigDecimal total = expenseRepository.findTotalIncomeByProfileId(profile.getId());
+        return total!=null?total:BigDecimal.ZERO;
+    }
 
     // helper methods
 
