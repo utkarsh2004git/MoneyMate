@@ -17,12 +17,12 @@ const excludeEndpoints = ["/login","/register","/activate","/status","/health"];
 
 axiosConfig.interceptors.request.use((config)=>{
     const shouldSkipToken = excludeEndpoints.some((endpoint)=>{
-        config.url?.includes(endpoint)
+        return config.url?.includes(endpoint)
     });
     if(!shouldSkipToken){
         const accessToken = localStorage.getItem("token");
         if(accessToken){
-            config.headers.Authorization = `Bearer ${token}`;
+            config.headers.Authorization = `Bearer ${accessToken}`;
         }
     }
     return config
@@ -43,8 +43,11 @@ axiosConfig.interceptors.response.use((response)=>{
             console.error("Server error. Please  try again later.")
             
         }
+
     }else if(error.code === "ECONNABORTED"){
         console.error("Request timeout. Please try again.")
     }
     return Promise.reject(error);
 });
+
+export default axiosConfig

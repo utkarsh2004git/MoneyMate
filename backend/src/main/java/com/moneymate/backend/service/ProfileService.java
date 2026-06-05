@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -11,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.moneymate.backend.dto.AuthDTO;
 import com.moneymate.backend.dto.ProfileDTO;
@@ -34,6 +36,11 @@ public class ProfileService {
     private String activationUrl;
 
     public ProfileDTO registerProfile(ProfileDTO profileDTO){
+
+        if (profileRepository.existsByEmail(profileDTO.getEmail())) {
+            System.out.println("Duplicate email");
+            throw new ResponseStatusException(HttpStatus.CONFLICT,"Email is already registered");
+        }
         ProfileEntity newProfile = toEntity(profileDTO);
         newProfile.setActivationToken(UUID.randomUUID().toString());
 
