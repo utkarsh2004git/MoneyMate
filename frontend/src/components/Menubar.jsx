@@ -40,7 +40,7 @@ const Menubar = ({ activeMenu }) => {
         <div className="flex items-center gap-5 ">
           <button
             onClick={() => setOpenSideMenu(!openSideMenu)}
-            className="block lg:hidden text-black hover:bg-color-gray-100 p-1 rounded transition-colors"
+            className="cursor-pointer block lg:hidden text-black hover:bg-color-gray-100 p-1 rounded transition-colors"
           >
             {openSideMenu ? <X /> : <Menu />}
           </button>
