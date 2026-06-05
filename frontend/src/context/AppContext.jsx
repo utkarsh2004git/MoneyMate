@@ -1,6 +1,6 @@
 import React, { createContext, useState } from 'react'
 
-const AppContext = createContext();
+export const AppContext = createContext();
 
 const AppContextProvider = ({children})=>{
 
@@ -8,7 +8,8 @@ const AppContextProvider = ({children})=>{
 
     
     const contextValue={
-        user
+        user,
+        setUser
     }
     return(
         <AppContext.Provider value={contextValue}>

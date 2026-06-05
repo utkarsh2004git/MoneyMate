@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets.js";
 import InputField from "../components/InputField.jsx";
@@ -7,12 +7,14 @@ import { validateEmail } from "../util/validation.js";
 import axiosConfig from "../util/axiosConfig.js";
 import { API_ENDPOINTS } from "../util/apiEndpoints.js";
 import toast from "react-hot-toast";
+import { AppContext } from "../context/AppContext.jsx";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const {setUser} = useContext(AppContext);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -39,16 +41,17 @@ const Login = () => {
           email,
           password
       })
-      console.log(response);
+      // console.log(response);
       
-
-      if(response.status === 200){
-          toast.success("Login Succesful")
+      const {token, user} = response.data;
+      if(token){
+        localStorage.setItem("token",token);
+        setUser(user);
+        navigate("/dashboard");
       }
 
     } catch (err) {
-      console.log(err);
-      
+        console.log(err);
         console.log("Error response:", err.response?.data);
 
         setError(

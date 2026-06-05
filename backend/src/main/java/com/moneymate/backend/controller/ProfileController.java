@@ -34,7 +34,7 @@ public class ProfileController {
     public ResponseEntity<String> activateProfile(@RequestParam String token){
         boolean activated = profileService.activateProfile(token);
         if(activated){
-            return ResponseEntity.ok("Account activated successfully!");
+            return ResponseEntity.ok("Account activated successfully!. You can close this window.");
         }else{
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid activation token.");
         }

@@ -7,19 +7,22 @@ import axiosConfig from "../util/axiosConfig.js";
 import { API_ENDPOINTS } from "../util/apiEndpoints.js";
 import toast from "react-hot-toast"
 import {LoaderCircle} from "lucide-react"
+import ProfilePhotoSelector from "../components/ProfilePhotoSelector.jsx";
+import uploadProfileImage from "../util/uploadProfileImage.js";
 
 const Signup = () => {
   const [fullName, setFullname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [profilePhoto, setProfilePhoto] = useState(null);
   const [error, setError] = useState(null);
 
   const navigate = useNavigate();
 
   const handleSignup = async (e) => {
     e.preventDefault();
-
+    let profileImageUrl = "";
     setError(null);
 
     if (!fullName || !email || !password) {
@@ -33,13 +36,21 @@ const Signup = () => {
 
     // signup api call
     try {
+        
+        // upload image if its present
+        if(profilePhoto){
+            const imageUrl = await uploadProfileImage(profilePhoto);
+            profileImageUrl = imageUrl || "";
+        }
+
         setLoading(true);
         console.log("Signup data prepared for backend:", { fullName, email, password });
 
         const response = await axiosConfig.post(API_ENDPOINTS.REGISTER,{
             fullName,
             email,
-            password
+            password,
+            profileImageUrl
         })
         console.log(response);
         
@@ -82,7 +93,9 @@ const Signup = () => {
           </p>
 
           <form onSubmit={handleSignup} className="space-y-5">
-            
+            <div className="flex justify-center mb-6">
+                <ProfilePhotoSelector image={profilePhoto} setImage = {setProfilePhoto} />
+            </div>
             {/* Reusable Input Fields */}
             <InputField
               label="Full Name"
