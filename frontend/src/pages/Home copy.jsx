@@ -1,14 +1,15 @@
 import React from 'react'
 import Dashboard from '../components/Dashboard'
 
-const Expense = () => {
+const Home = () => {
+
   return (
     <div>
-      <Dashboard activeMenu={"Expense"}>
-        This is Expense page.
+      <Dashboard>
+        This is Filter page.
       </Dashboard>
     </div>
   )
 }
 
-export default Expense
+export default Home
