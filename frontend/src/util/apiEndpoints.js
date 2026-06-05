@@ -7,6 +7,7 @@ const CLOUDINARY_API_SECRET=import.meta.env.VITE_CLOUDINARY_API_SECRET;
 export const API_ENDPOINTS = {
     LOGIN : "/login",
     REGISTER : "/register",
+    GET_USER_PROFILE : "/profile",
     UPLOAD_IMAGE:`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
     
 }
