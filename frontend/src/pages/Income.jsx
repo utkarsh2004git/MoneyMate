@@ -141,21 +141,18 @@ const Income = () => {
 
   const handleDownloadIncomeDetails = async () => {
     try {
-      // FIX 1: Add responseType: 'blob' so Axios knows it's a binary file, not JSON
       const res = await axiosConfig.get(API_ENDPOINTS.INCOME_EXCEL_DOWNLOAD, {
         responseType: "blob",
       });
 
       let filename = "income_details.xlsx";
 
-      // Create a Blob from the response data
       const url = window.URL.createObjectURL(new Blob([res.data]));
       const link = document.createElement("a");
       link.href = url;
       link.setAttribute("download", filename);
       document.body.appendChild(link);
 
-      // FIX 2: Actually trigger the download by clicking the link!
       link.click();
 
       // Clean up
@@ -172,9 +169,20 @@ const Income = () => {
     }
   };
 
-  
   const handleEmailIncomeDetails = async () => {
-    console.log("Email income details");
+    // console.log("Email income details");
+    
+    try {
+      const res = await axiosConfig.get(API_ENDPOINTS.EMAIL_INCOME);
+
+      toast.success("Income details emailed successfully");
+    } catch (error) {
+      console.error(
+        "Failed emailing income: ",
+        error.response?.data?.message || "Failed to email income",
+      );
+      toast.error(error.response?.data?.message || "Failed to email income");
+    }
   };
 
   return (
