@@ -5,6 +5,7 @@ com\moneymate\backend\controller\ExpenseController.class
 com\moneymate\backend\service\DashboardService.class
 com\moneymate\backend\dto\FilterDTO.class
 com\moneymate\backend\BackendApplication.class
+com\moneymate\backend\controller\DownloadExcelController.class
 com\moneymate\backend\dto\ProfileDTO$ProfileDTOBuilder.class
 com\moneymate\backend\util\JwtUtil.class
 com\moneymate\backend\service\EmailService.class
@@ -20,6 +21,7 @@ com\moneymate\backend\service\ProfileService.class
 com\moneymate\backend\entity\IncomeEntity$IncomeEntityBuilder.class
 com\moneymate\backend\entity\ExpenseEntity.class
 com\moneymate\backend\config\SecurityConfig.class
+com\moneymate\backend\controller\EmailExcelController.class
 com\moneymate\backend\service\ExpenseService.class
 com\moneymate\backend\entity\CategoryEntity$CategoryEntityBuilder.class
 com\moneymate\backend\dto\RecentTransactionDTO.class
@@ -37,6 +39,7 @@ com\moneymate\backend\repository\ExpenseRepository.class
 com\moneymate\backend\dto\ProfileDTO.class
 com\moneymate\backend\repository\IncomeRepository.class
 com\moneymate\backend\security\AppUserDetailsService.class
+com\moneymate\backend\service\ExcelExportService.class
 com\moneymate\backend\dto\CategoryDTO.class
 com\moneymate\backend\dto\CategoryDTO$CategoryDTOBuilder.class
 com\moneymate\backend\entity\ProfileEntity.class
