@@ -14,7 +14,7 @@ const Sidebar = ({activeMenu}) => {
                 <img src={user?.profileImageUrl || ""} alt="profile image" className='w-20 h-20 bg-slate-400 rounded-full' />
 
             ):(
-                <User  className='w-20 h-20 text-xl  border-2 border-gray-400 rounded-full '/>
+                <User  className='w-20 h-20 text-xl text-blue-500 border-2 border-blue-800 p-2 rounded-full '/>
             )}
             <h5 className='text-gray-950 font-medium leading-6'>
                 {user.fullName || ""}

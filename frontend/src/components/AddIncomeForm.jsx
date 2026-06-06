@@ -31,11 +31,11 @@ const AddIncomeForm = ({ onAddIncome, categories }) => {
     setIncome({ ...income, [key]: val });
   };
 
-  useEffect(()=>{
-    if(categories.length>0 && !income.categoryId){
-      setIncome((prev)=>({...prev, categoryId:categories[0].id}))
+  useEffect(() => {
+    if (categories.length > 0 && !income.categoryId) {
+      setIncome((prev) => ({ ...prev, categoryId: categories[0].id }));
     }
-  },[categories,income.categoryId]);
+  }, [categories, income.categoryId]);
 
   return (
     <div>
@@ -85,14 +85,16 @@ const AddIncomeForm = ({ onAddIncome, categories }) => {
 
       <div className="flex justify-end mt-6">
         <button
-          className={` p-2 px-3 hover:bg-blue-600 cursor-pointer rounded-md bg-blue-500 duration-200 text-white`}
+          className={` p-2 px-3 flex gap-2 justify-center items-center hover:bg-blue-600 cursor-pointer rounded-md bg-blue-500 duration-200 text-white`}
           onClick={handleAddIncome}
           disabled={loading}
         >
           {loading ? (
             <>
-              Adding...
-              <LoaderCircle className=" h-4 w-4 animate-spin" />
+
+                <span>Adding...</span>
+                <LoaderCircle className=" h-4 w-4 animate-spin" />
+
             </>
           ) : (
             <>Add Income</>

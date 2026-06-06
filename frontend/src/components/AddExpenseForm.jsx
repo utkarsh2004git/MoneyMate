@@ -85,13 +85,13 @@ const AddExpenseForm = ({ onAddExpense, categories }) => {
 
       <div className="flex justify-end mt-6">
         <button
-          className={` p-2 px-3 hover:bg-blue-600 cursor-pointer rounded-md bg-blue-500 duration-200 text-white`}
+          className={` p-2 px-3 flex gap-2 justify-center items-center hover:bg-blue-600 cursor-pointer rounded-md bg-blue-500 duration-200 text-white`}
           onClick={handleAddExpense}
           disabled={loading}
         >
           {loading ? (
             <>
-              Adding...
+              <span>Adding...</span>
               <LoaderCircle className=" h-4 w-4 animate-spin" />
             </>
           ) : (
