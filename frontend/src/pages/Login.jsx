@@ -8,6 +8,7 @@ import axiosConfig from "../util/axiosConfig.js";
 import { API_ENDPOINTS } from "../util/apiEndpoints.js";
 import toast from "react-hot-toast";
 import { AppContext } from "../context/AppContext.jsx";
+import Header from "../components/Header.jsx";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -65,6 +66,7 @@ const Login = () => {
 
   return (
     <div className="h-screen w-full relative flex items-center justify-center overflow-hidden">
+      <Header />
       {/* Background image with blur to match Signup */}
       <img
         src={assets.bgImage}

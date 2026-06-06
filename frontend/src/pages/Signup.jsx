@@ -9,6 +9,7 @@ import toast from "react-hot-toast"
 import {LoaderCircle} from "lucide-react"
 import ProfilePhotoSelector from "../components/ProfilePhotoSelector.jsx";
 import uploadProfileImage from "../util/uploadProfileImage.js";
+import Header from "../components/Header.jsx";
 
 const Signup = () => {
   const [fullName, setFullname] = useState("");
@@ -76,13 +77,14 @@ const Signup = () => {
 
   return (
     <div className="h-screen w-full relative flex items-center justify-center overflow-hidden">
+      <Header/>
       <img
         src={assets.bgImage}
         alt="background"
         className="absolute inset-0 w-full h-full object-cover filter blur-sm"
-      />
+        />
       
-      <div className="relative z-10 w-full max-w-lg px-6">
+      <div className="relative mt-13 z-10 w-full max-w-lg px-6">
         <div className="bg-white opacity-95 backdrop-blur-sm rounded-lg shadow-2xl p-8 max-h-[90vh] overflow-y-auto">
           
           <h3 className="text-2xl font-semibold text-black text-center mb-2">
@@ -104,7 +106,7 @@ const Signup = () => {
               onChange={(e) => setFullname(e.target.value)}
               placeholder="John Doe"
               required
-            />
+              />
 
             <InputField
               label="Email Address"
@@ -113,7 +115,7 @@ const Signup = () => {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@example.com"
               required
-            />
+              />
 
             <InputField
               label="Password"
@@ -122,7 +124,7 @@ const Signup = () => {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="********"
               required
-            />
+              />
 
             {error && (
               <div className="text-red-500 text-sm text-center bg-red-50 py-2 rounded-md">
@@ -134,14 +136,14 @@ const Signup = () => {
               type="submit"
               className={`w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors mt-2 cursor-pointer flex items-center justify-center gap-2 ${loading?'opacity-60 cursor-not-allowed ':''}`}
               disabled={loading}
-            >
+              >
               {loading?(
-                    <>
+                <>
                     Signing Up...
                     <LoaderCircle className="animate-spin w-5 h-5" />
                     </>
                 ):(
-                    "Sign Up"
+                  "Sign Up"
                 )
               }
             </button>
@@ -152,7 +154,7 @@ const Signup = () => {
             <button 
               onClick={() => navigate("/login")}
               className="text-blue-600 font-medium hover:underline focus:outline-none cursor-pointer"
-            >
+              >
               Log in
             </button>
           </p>
@@ -160,6 +162,7 @@ const Signup = () => {
         </div>
       </div>
     </div>
+
   );
 };
 
