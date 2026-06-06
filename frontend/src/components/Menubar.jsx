@@ -44,7 +44,10 @@ const Menubar = ({ activeMenu }) => {
           >
             {openSideMenu ? <X /> : <Menu />}
           </button>
-          <div onClick={()=>navigate("/")} className="flex items-center gap-2">
+          <div
+            onClick={() => navigate("/")}
+            className="flex items-center gap-2"
+          >
             <img src={assets.logo} alt="logo" className="h-10 w-10" />
             <span className="text-lg font-medium text-balance truncate select-none">
               MoneyMate
@@ -58,7 +61,16 @@ const Menubar = ({ activeMenu }) => {
             onClick={() => setShowDropDown(!showDropDown)}
             className="flex cursor-pointer items-center justify-center w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-800 focus:ring-offset-2"
           >
-            <User className="text-blue-500 " />
+            {/* <User className="text-blue-500 " /> */}
+            {user?.profileImageUrl ? (
+              <img
+                src={user?.profileImageUrl || ""}
+                alt="profile image"
+                className="rounded-full"
+              />
+            ) : (
+              <User className="rounded-full text-blue-500 " />
+            )}
           </button>
 
           {/* dropdown */}
@@ -69,7 +81,15 @@ const Menubar = ({ activeMenu }) => {
               <div className="px-4 py-3 border-b border-gray-100 ">
                 <div className="flex items-center gap-3">
                   <div className="flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full">
-                    <User className="w-4 h-4 text-blue-600" />
+                    {user?.profileImageUrl ? (
+                      <img
+                        src={user?.profileImageUrl || ""}
+                        alt="profile image"
+                        className="rounded-full"
+                      />
+                    ) : (
+                      <User className="w-4 h-4 rounded-full text-blue-500 " />
+                    )}
                   </div>
                   <div className="flex-1 min-w-0 ">
                     <p className="text-sm font-medium text-gray-800 truncate">

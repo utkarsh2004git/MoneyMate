@@ -12,6 +12,7 @@ import DeleteAlert from "../components/DeleteAlert";
 import IncomeOverview from "../components/IncomeOverview";
 import ExpenseOverview from "../components/ExpenseOverview";
 import ExpenseList from "../components/ExpenseList";
+import AddExpenseForm from "../components/AddExpenseForm";
 
 const Expense = () => {
   useUser();
@@ -88,8 +89,11 @@ const Expense = () => {
       toast.error("Please select date");
       return;
     }
-    const today = new Date().toISOString().split("T")[0];
+    const now = new Date();
+
+    const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
     if (date > today) {
+      // toast.error(today);
       toast.error("Future date can't be selected");
       return;
     }
@@ -167,13 +171,15 @@ const Expense = () => {
         "Failed downloading expense: ",
         error.response?.data?.message || "Failed to download expense",
       );
-      toast.error(error.response?.data?.message || "Failed to download expense");
+      toast.error(
+        error.response?.data?.message || "Failed to download expense",
+      );
     }
   };
 
   const handleEmailExpenseDetails = async () => {
     // console.log("Email expense details");
-    
+
     try {
       const res = await axiosConfig.get(API_ENDPOINTS.EMAIL_EXPENSE);
 
@@ -204,7 +210,7 @@ const Expense = () => {
 
           {/* Expense Overview  */}
 
-          <ExpenseOverview  transactions={expenseData} />
+          <ExpenseOverview transactions={expenseData} />
 
           <ExpenseList
             transactions={expenseData}
@@ -220,8 +226,8 @@ const Expense = () => {
           onClose={() => setOpenAddExpenseModal(false)}
           title={"Add Expense"}
         >
-          <AddIncomeForm
-            onAddIncome={handleAddExpense}
+          <AddExpenseForm
+            onAddExpense={handleAddExpense}
             categories={categories}
           />
         </Modal>
