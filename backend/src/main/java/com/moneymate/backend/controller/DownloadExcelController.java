@@ -12,12 +12,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.moneymate.backend.dto.ExpenseDTO;
 import com.moneymate.backend.dto.IncomeDTO;
-import com.moneymate.backend.entity.ProfileEntity;
-import com.moneymate.backend.service.EmailService;
 import com.moneymate.backend.service.ExcelExportService;
+import com.moneymate.backend.service.ExpenseService;
 import com.moneymate.backend.service.IncomeService;
-import com.moneymate.backend.service.ProfileService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -28,6 +27,7 @@ import lombok.RequiredArgsConstructor;
 public class DownloadExcelController {
 
     private final IncomeService incomeService;
+    private final ExpenseService expenseService;
     private final ExcelExportService excelExportService;
 
 
@@ -35,10 +35,31 @@ public class DownloadExcelController {
     public ResponseEntity<Resource> downloadIncomeExcel() {
 
         // 1. Fetch the data using your existing service
-        List<IncomeDTO> incomes = incomeService.getCurrentMonthExpensesForCurrentProfile();
+        List<IncomeDTO> incomes = incomeService.getCurrentMonthIncomesForCurrentProfile();
 
         // 2. Generate the Excel file stream
         ByteArrayInputStream in = excelExportService.exportIncomesToExcel(incomes);
+
+        // 3. Prepare the response
+        String filename = "income_details.xlsx";
+        InputStreamResource file = new InputStreamResource(in);
+
+        return ResponseEntity.ok()
+                // The CONTENT_DISPOSITION header tells the browser to download the file instead of opening it
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
+                // This is the official MIME type for .xlsx files
+                .contentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"))
+                .body(file);
+    }
+
+    @GetMapping("/download/expense")
+    public ResponseEntity<Resource> downloadExpenseExcel() {
+
+        // 1. Fetch the data using your existing service
+        List<ExpenseDTO> expenses = expenseService.getCurrentMonthExpensesForCurrentProfile();
+
+        // 2. Generate the Excel file stream
+        ByteArrayInputStream in = excelExportService.exportExpenseToExcel(expenses);
 
         // 3. Prepare the response
         String filename = "income_details.xlsx";

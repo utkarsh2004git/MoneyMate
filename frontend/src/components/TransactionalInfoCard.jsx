@@ -39,7 +39,7 @@ const TransactionalInfoCard = ({
           {!hideDeleteBtn && (
             <button
               onClick={onDelete}
-              className="text-gray-400 hover:text-red-800 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+              className="text-gray-400 hover:text-red-800 opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
             >
               <Trash2 size={18} />
             </button>

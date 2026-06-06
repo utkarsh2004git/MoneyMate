@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.moneymate.backend.dto.IncomeDTO;
 import com.moneymate.backend.service.IncomeService;
 
@@ -31,7 +32,7 @@ public class IncomeController {
 
     @GetMapping
     public ResponseEntity<List<IncomeDTO>> getExpenses(){
-        List<IncomeDTO> incomes = incomeService.getCurrentMonthExpensesForCurrentProfile();
+        List<IncomeDTO> incomes = incomeService.getCurrentMonthIncomesForCurrentProfile();
         return ResponseEntity.ok(incomes);
     }
 
