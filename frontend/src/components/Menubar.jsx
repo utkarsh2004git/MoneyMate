@@ -44,7 +44,7 @@ const Menubar = ({ activeMenu }) => {
           >
             {openSideMenu ? <X /> : <Menu />}
           </button>
-          <div className="flex items-center gap-2">
+          <div onClick={()=>navigate("/")} className="flex items-center gap-2">
             <img src={assets.logo} alt="logo" className="h-10 w-10" />
             <span className="text-lg font-medium text-balance truncate select-none">
               MoneyMate

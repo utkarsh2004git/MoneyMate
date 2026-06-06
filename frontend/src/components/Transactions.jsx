@@ -16,17 +16,29 @@ const Transactions = ({ transactions, onMore, type, title }) => {
         </button>
       </div>
       <div className="mt-6">
-        {transactions?.slice(0, 5)?.map((t) => (
-          <TransactionalInfoCard
-            key={t.id}
-            title={t.name}
-            icon={t.icon}
-            date={moment(t.date).format("Do MMM YYYY")}
-            amount={t.amount}
-            type={type}
-            hideDeleteBtn={true}
-          />
-        ))}
+        {transactions.length === 0 ? (
+          <div className="text-center py-8 text-gray-500">
+            <h1 className="text-lg font-semibold">No transactions yet</h1>
+            <p className="mt-2 text-sm">
+              Your recent transactions will appear here once you start adding
+              them.
+            </p>
+          </div>
+        ) : (
+          <>
+            {transactions.slice(0, 5).map((t) => (
+              <TransactionalInfoCard
+                key={t.id}
+                title={t.name}
+                icon={t.icon}
+                date={moment(t.date).format("Do MMM YYYY")}
+                amount={t.amount}
+                type={type}
+                hideDeleteBtn={true}
+              />
+            ))}
+          </>
+        )}
       </div>
     </div>
   );
