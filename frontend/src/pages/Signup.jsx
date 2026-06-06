@@ -44,7 +44,7 @@ const Signup = () => {
         }
 
         setLoading(true);
-        console.log("Signup data prepared for backend:", { fullName, email, password });
+        // console.log("Signup data prepared for backend:", { fullName, email, password });
 
         const response = await axiosConfig.post(API_ENDPOINTS.REGISTER,{
             fullName,

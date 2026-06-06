@@ -20,7 +20,7 @@ const CategoryList = ({categories, onEditCategory}) => {
             {categories.map((c) =>(
                 <div 
                 key={c.id}
-                className='group relative flex items-center gap-4 p-3 rounded-lg hover:bg-blue-100/50 cursor-pointer'>
+                className='group relative flex items-center gap-4 p-3 rounded-lg hover:bg-blue-100/50 '>
                     {/* Icon/Emoji display  */}
                     <div className='w-12 h-12 flex items-center justify-center text-xl text-gray-800 bg-blue-100/50 rounded-full'>
                         {c.icon ? (<span className='text-xl'>

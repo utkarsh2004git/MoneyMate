@@ -34,13 +34,14 @@ const InputField = ({
         {isSelect ? (
           <select
             id={id}
-            name={name} // <-- ADDED: Crucial for your handleChange function
+            name={name} 
             value={value}
-            onChange={onChange} // <-- SIMPLIFIED: No need for the arrow function wrapper
-            required={required} // <-- ADDED: For form validation
+            onChange={onChange} 
+            required={required} 
             className="w-full bg-transparent outline-none border border-slate-300 rounded-md py-2 px-3 text-slate-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
           >
             {/* Added optional chaining (?) just in case options array isn't passed */}
+            <option value="" disabled={true} className="">Select</option>
             {options?.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}

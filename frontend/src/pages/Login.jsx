@@ -35,7 +35,7 @@ const Login = () => {
 
     try {
       setLoading(true);
-      console.log("Login credentials ready for backend:", { email, password });
+      // console.log("Login credentials ready for backend:", { email, password });
       
       const response = await axiosConfig.post(API_ENDPOINTS.LOGIN,{
           email,

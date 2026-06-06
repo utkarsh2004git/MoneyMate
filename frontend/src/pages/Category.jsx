@@ -87,7 +87,7 @@ const Category = () => {
 
     try {
       const res = await axiosConfig.put(API_ENDPOINTS.UPDATE_CATEGORY(id),{name,type,icon});
-      console.log(res);
+      // console.log(res);
       if(res.status===200){
         setOpenEditCategoryModel(false);
         setSelectedCategory(null);
@@ -96,11 +96,16 @@ const Category = () => {
       }
       
     } catch (error) {
-      console.error("Failed updating category: ",error?.response.data?.message || "Failed to update Category")
-      toast.error(error?.response.data?.message || "Failed to update Category")
+      console.error("Failed updating category: ",error.response?.data?.message || "Failed to update Category")
+      toast.error(error.response?.data?.message || "Failed to update Category")
+    }finally {
+      setLoading(false);
     }
 
   };
+
+
+
 
   return (
     <div>
@@ -111,7 +116,7 @@ const Category = () => {
             <h2 className="text-2xl font-semibold">All Categories</h2>
             <button
               onClick={() => setOpenAddCategoryModel(true)}
-              className="rounded-md font-semibold cursor-pointer bg-green-200 text-green-800 duration-200  p-2 flex items-center gap-1"
+              className="hover:bg-blue-600 cursor-pointer rounded-md bg-blue-500 text-white duration-200  p-2 flex items-center gap-1"
             >
               <Plus size={15} />
               Add Category

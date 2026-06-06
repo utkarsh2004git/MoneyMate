@@ -77,11 +77,11 @@ const AddCategoryForm = ({ onAddCategory, initialCategoryData, isEditing }) => {
         <button
           type="submit"
           disabled={loading}
-          className={` p-2 px-3  cursor-pointer rounded-md bg-green-500 text-white`}
+          className={` p-2 px-3 hover:bg-blue-600 cursor-pointer rounded-md bg-blue-500 duration-200 text-white`}
           onClick={handleSubmit}
         >
           {loading ? (
-            <span className="flex items-center justify-center gap-2 cursor-not-allowed">
+            <span className="flex  items-center justify-center gap-2 cursor-not-allowed">
               {isEditing?"Updating...":"Adding..."}
               <LoaderCircle className="h-4 w-4 animate-spin" />
             </span>
