@@ -8,6 +8,7 @@ import Income from "./pages/Income";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import {Toaster} from "react-hot-toast";
+import HeroPage from "./pages/HeroPage";
 
 const App = () => {
   return (
@@ -15,7 +16,7 @@ const App = () => {
     <Toaster/>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Root />} />
+          <Route path="/" element={<HeroPage />} />
           <Route path="/dashboard" element={<Home />} />
           <Route path="/income" element={<Income />} />
           <Route path="/expense" element={<Expense />} />

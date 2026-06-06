@@ -18,7 +18,7 @@ const TransactionalInfoCard = ({
   };
 
   return (
-    <div className="group relative flex items-center gap-4 mt-2 p-3 rounded-lg hover:bg-blue-100/50 ">
+    <div className=" group relative flex items-center gap-4 mt-2 p-3 rounded-lg hover:bg-blue-100/50 ">
       <div className="w-12 h-12 flex items-center justify-center text-xl text-gray-800 bg-blue-100/50 rounded-full">
         {icon ? (
           <>

@@ -50,7 +50,7 @@ const Filter = () => {
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-2xl font-semibold">Filter Transactions</h2>
           </div>
-          <div className="bg-white p-4 mb-4">
+          <div className="bg-white p-4 mb-4 rounded-lg shadow">
             <div className="flex items-center justify-between mb-4">
               <h5 className="text-lg font-semibold ">Select the filters</h5>
             </div>
@@ -163,7 +163,7 @@ const Filter = () => {
               </div>
             </form>
           </div>
-          <div className="bg-white p-4">
+          <div className="bg-white p-4 rounded-lg shadow">
             <div className="flex justify-between items-center mb-4">
               <h5 className="text-2xl font-semibold">Transactions</h5>
             </div>
