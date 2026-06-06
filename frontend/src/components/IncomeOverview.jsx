@@ -22,7 +22,7 @@ const IncomeOverview = ({ transactions }) => {
         </p>
       </div>
 
-      <div className="mt-6 h-[320px]">
+      <div className="mt-6 h-80">
         <CustomLineChart data={chartData} />
       </div>
     </div>

@@ -139,6 +139,44 @@ const Income = () => {
     }
   };
 
+  const handleDownloadIncomeDetails = async () => {
+    try {
+      // FIX 1: Add responseType: 'blob' so Axios knows it's a binary file, not JSON
+      const res = await axiosConfig.get(API_ENDPOINTS.INCOME_EXCEL_DOWNLOAD, {
+        responseType: "blob",
+      });
+
+      let filename = "income_details.xlsx";
+
+      // Create a Blob from the response data
+      const url = window.URL.createObjectURL(new Blob([res.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", filename);
+      document.body.appendChild(link);
+
+      // FIX 2: Actually trigger the download by clicking the link!
+      link.click();
+
+      // Clean up
+      link.parentNode.removeChild(link);
+      window.URL.revokeObjectURL(url);
+
+      toast.success("Download income details successful");
+    } catch (error) {
+      console.error(
+        "Failed downloading income: ",
+        error.response?.data?.message || "Failed to download income",
+      );
+      toast.error(error.response?.data?.message || "Failed to download income");
+    }
+  };
+
+  
+  const handleEmailIncomeDetails = async () => {
+    console.log("Email income details");
+  };
+
   return (
     <div>
       <Dashboard activeMenu={"Income"}>
@@ -156,11 +194,13 @@ const Income = () => {
 
           {/* Income Overview  */}
 
-          <IncomeOverview transactions={incomeData}/>
+          <IncomeOverview transactions={incomeData} />
 
           <IncomeList
             transactions={incomeData}
             onDelete={(id) => setOpenDeleteAlert({ show: true, data: id })}
+            onDownload={handleDownloadIncomeDetails}
+            onEmail={handleEmailIncomeDetails}
           />
         </div>
         {/* Add income modal   */}
