@@ -9,6 +9,7 @@ import { Plus } from "lucide-react";
 import toast, { ToastBar } from "react-hot-toast";
 import AddIncomeForm from "../components/AddIncomeForm";
 import DeleteAlert from "../components/DeleteAlert";
+import IncomeOverview from "../components/IncomeOverview";
 
 const Income = () => {
   useUser();
@@ -44,7 +45,7 @@ const Income = () => {
       const res = await axiosConfig.get(
         API_ENDPOINTS.GET_CATEGORY_BY_TYPE("income"),
       );
-      console.log(res);
+      // console.log(res);
       if (res.status === 200) {
         setCategories(res.data);
       }
@@ -152,6 +153,10 @@ const Income = () => {
               Add Income
             </button>
           </div>
+
+          {/* Income Overview  */}
+
+          <IncomeOverview transactions={incomeData}/>
 
           <IncomeList
             transactions={incomeData}

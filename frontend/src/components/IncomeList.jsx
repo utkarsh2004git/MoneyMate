@@ -5,9 +5,9 @@ import moment from "moment"
 const IncomeList = ({ transactions, onDelete }) => {
 
   return (
-    <div className="bg-white  p-2">
+    <div className="bg-white  p-4">
       <div className="flex w-full  items-center justify-between">
-        <h5 className="text-lg ">Income Sources</h5>
+        <h5 className="text-lg font-semibold">Income Sources</h5>
       <div className="flex items-center justify-end gap-2">
         <button className="flex  cursor-pointer hover:bg-blue-200/40 justify-center items-center rounded-md gap-2 p-1 px-2 bg-gray-200/40 hover:text-blue-800">
           <Mail size={15} className="text-base" />
