@@ -1,7 +1,7 @@
 import { Box, PencilIcon } from 'lucide-react'
 import React from 'react'
 
-const CategoryList = ({categories, onEditCategory, onDeleteCategory}) => {
+const CategoryList = ({categories, onEditCategory}) => {
   return (
     <div className='card p-4'>
 
@@ -42,7 +42,7 @@ const CategoryList = ({categories, onEditCategory, onDeleteCategory}) => {
                         </div>
                         {/* Action buttons */}
                         <div className='flex items-center gap-2'>
-                            <button className='text-gray-400 hover:text-blue-500 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer'>
+                            <button onClick={()=>onEditCategory(c)} className='text-gray-400 hover:text-blue-500 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer'>
                                 <PencilIcon size={18}/>
                             </button>
 
