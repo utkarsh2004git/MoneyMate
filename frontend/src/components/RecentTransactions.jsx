@@ -4,6 +4,8 @@ import TransactionalInfoCard from "./TransactionalInfoCard";
 import moment from "moment";
 
 const RecentTransactions = ({ transactions = [], onMore, type }) => {
+
+  
   return (
     <div className="bg-white p-4 rounded-lg shadow">
       <div className="flex items-center justify-between">
@@ -27,14 +29,14 @@ const RecentTransactions = ({ transactions = [], onMore, type }) => {
             </p>
           </div>
         ) : (
-          transactions.slice(0, 5).map((t) => (
+          transactions.slice(0, 5).map((t,i) => (
             <TransactionalInfoCard
-              key={t.id}
+              key={i}
               title={t.name}
               icon={t.icon}
               date={moment(t.date).format("Do MMM YYYY")}
               amount={t.amount}
-              type={type}
+              type={t.type}
               hideDeleteBtn={true}
             />
           ))

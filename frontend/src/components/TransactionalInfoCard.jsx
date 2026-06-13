@@ -1,5 +1,5 @@
 import { Trash, Trash2, TrendingDown, TrendingUp, Utensils, UtensilsCrossed, Wallet } from "lucide-react";
-import React from "react";
+import React, { useEffect } from "react";
 import { addThousandsSeparator } from "../util/util";
 
 const TransactionalInfoCard = ({
@@ -16,6 +16,7 @@ const TransactionalInfoCard = ({
       ? "bg-green-50 text-green-800"
       : "bg-red-50 text-red-800";
   };
+
 
   return (
     <div className=" group relative flex items-center gap-4 mt-2 p-3 rounded-lg hover:bg-blue-100/50 ">
